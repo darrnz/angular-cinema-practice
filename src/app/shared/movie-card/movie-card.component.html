@@ -1,0 +1,19 @@
+<mat-card class="example-card">
+  <mat-card-header [ngStyle]="{ height: '100px' }">
+    <mat-card-title>{{ movieData?.title?.toUpperCase() }}</mat-card-title>
+    <mat-card-subtitle>New Release</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image [src]="movieData?.image" [alt]="movieData?.title" />
+  <!-- <mat-card-content>
+    <p>
+    </p>
+  </mat-card-content> -->
+  <mat-card-actions class="cardActions">
+    <app-action-button mat-button text="Buy Tickets" />
+    <app-action-button
+      mat-button
+      text="Details"
+      (click)="goToMovieDetails(movieData?.id ?? '')"
+    />
+  </mat-card-actions>
+</mat-card>

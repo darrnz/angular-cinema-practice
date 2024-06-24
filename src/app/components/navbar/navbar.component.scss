@@ -1,0 +1,13 @@
+@import "src/app/app.component.scss";
+
+.navBarClass {
+  
+  display: flex;
+  justify-content: space-between !important;
+  align-items: center;
+}
+
+.navButtonsMenu {
+  display: flex;
+  justify-content: space-between;
+}

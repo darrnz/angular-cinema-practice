@@ -1,0 +1,20 @@
+<div class="storePage">
+  <h2>Store</h2>
+  <section>
+    <h2>Tickets</h2>
+  </section>
+  <section>
+    <h2>Snacks</h2>
+    <section>
+      <div>
+        <app-store-item
+          *ngFor="let snack of snackList"
+          [item]="snack"
+          [cartItems]="cartItems"
+          (cartItemsChange)="onUpdateCart($event)"
+        />
+      </div>
+    </section>
+    <div>Total: ${{ totalCart }}</div>
+  </section>
+</div>
