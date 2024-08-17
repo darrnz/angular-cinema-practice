@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { MovieDetailComponent } from './components/movie-detail/movie-detail.component';
 import { StoreComponent } from './components/store/store.component';
+import { SideNavComponent } from './components/side-nav/side-nav.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { StoreComponent } from './components/store/store.component';
     MainPageComponent,
     MovieDetailComponent,
     StoreComponent,
+    SideNavComponent,
   ],
   imports: [
     BrowserModule,

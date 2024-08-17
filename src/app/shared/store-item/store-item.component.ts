@@ -32,7 +32,6 @@ export class StoreItemComponent implements OnInit {
     this.quantity++;
     this.totalQuantity = this.quantity * (this.item?.price || 0);
     if (!this.cartHasItem()) {
-      console.log('Item', this.item);
       this.cartItems?.list.push({
         id: this.item?.id || 0,
         name: this.item?.name || '',
@@ -79,17 +78,13 @@ export class StoreItemComponent implements OnInit {
     )?.total;
     this.quantity = itemQuantity || 0;
     this.totalQuantity = itemTotal || 0;
-    console.log('itemQuantity', { itemQuantity, itemTotal });
-    console.log('Quanitty ITem', this.quantity);
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['cartItems'] && !changes['cartItems'].firstChange) {
-      console.log('CartItems - Changes', this.cartItems);
       const cartItem = this.cartItems.list.find(
         (item) => item.id === this.item?.id
       );
-      console.log('CartItem', cartItem);
       if (cartItem) {
         this.quantity = cartItem.quantity;
         this.totalQuantity = cartItem.quantity;

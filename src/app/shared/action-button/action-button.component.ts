@@ -13,7 +13,6 @@ export class ActionButtonComponent {
   @Input() cartItemsQuantity: number = 0;
 
   onClick(): void {
-    console.log('CLICKED');
     this.click.emit();
   }
 }

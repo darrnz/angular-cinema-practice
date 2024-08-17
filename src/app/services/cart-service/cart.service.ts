@@ -3,24 +3,30 @@ import { BehaviorSubject } from 'rxjs';
 import { ITotalCart } from 'src/app/types/store';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CartService {
-  private cartSubject =  new BehaviorSubject<ITotalCart>({
-  list: [],
-  totalToPay: 0,
-})
+  private cartSubject = new BehaviorSubject<ITotalCart>({
+    list: [],
+    totalToPay: 0,
+    isOpen: false,
+  });
 
-cart$ = this.cartSubject.asObservable();
+  cart$ = this.cartSubject.asObservable();
 
-constructor() { }
+  constructor() {}
 
-getCartItems(): ITotalCart {
-  return this.cartSubject.getValue();
-}
+  getCartItems(): ITotalCart {
+    const currentCartState = this.cartSubject.value;
+    return this.cartSubject.getValue();
+  }
 
-addCartItem(item: ITotalCart) {
-  this.cartSubject.next(item);
-}
+  addCartItem(item: ITotalCart) {
+    this.cartSubject.next(item);
+  }
 
+  openCartDetails(value: boolean) {
+    const currentCartState = this.cartSubject.value;
+    this.cartSubject.next({ ...currentCartState, isOpen: value });
+  }
 }

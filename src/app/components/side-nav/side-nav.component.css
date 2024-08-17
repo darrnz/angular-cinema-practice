@@ -1,0 +1,12 @@
+.sidebar {
+  z-index: 10;
+  height: 100%;
+  width: 350px;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.side-nav-content {
+  /* padding: 20px; */
+  color: white;
+  background-color: white;
+}

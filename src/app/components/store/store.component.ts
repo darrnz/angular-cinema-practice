@@ -28,13 +28,11 @@ export class StoreComponent {
   }
 
   onUpdateCart(item: ITotalCart) {
-    console.log('UPDATE CART', item);
     this.cartItems.list = item.list;
     this.calculateTotalCart();
     this.cartService.addCartItem(this.cartItems);
   }
   ngOnInit() {
-    console.log('Init', this.cartItems);
     this.snackService
       .getSnacks()
       .pipe()

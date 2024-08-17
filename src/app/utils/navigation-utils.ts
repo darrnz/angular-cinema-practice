@@ -13,7 +13,6 @@ export class NavigationService {
   }
 
   navigateToMovieDetail(id: string) {
-    console.log('ID', id)
     this.router.navigate([`/movie/${id}`]);
   }
 }

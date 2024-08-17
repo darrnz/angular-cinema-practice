@@ -12,7 +12,6 @@ export class MovieCardComponent {
   constructor(private navigationService: NavigationService) { }
 
   goToMovieDetails(id: string) {
-    console.log('ID - CARd', id)
     this.navigationService.navigateToMovieDetail(id);
   }
   @Input() movieData: IMovies | undefined = undefined

@@ -1,0 +1,11 @@
+<mat-sidenav-container>
+  <mat-sidenav  id="sidebar" mode="side" position="end" [(opened)]="isOpen"
+    >
+    <div>
+      <app-action-button text="Hide / Show" (click)="toggleSideNav()" />
+    </div>
+    <div ngFor=""></div
+  ></mat-sidenav>
+  
+  <mat-sidenav-content><ng-content></ng-content></mat-sidenav-content>
+</mat-sidenav-container>

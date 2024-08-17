@@ -1,9 +1,13 @@
 <mat-toolbar color="primary" class="fullWidth navBarClass">
   <div>Ramona Cinema</div>
   <div class="navButtonsMenu">
-    <app-action-button 
+    <app-action-button (click)="toggleCart()"
       ><div iconBtn>
-        <mat-icon [matBadge]="cartQuantity" [matBadgeColor]="'warn'" fontIcon="shopping_cart" />
+        <mat-icon
+          [matBadge]="cartQuantity"
+          [matBadgeColor]="'warn'"
+          fontIcon="shopping_cart"
+        />
       </div>
     </app-action-button>
     <app-action-button

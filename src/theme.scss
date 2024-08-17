@@ -31,5 +31,5 @@ $my-app-dark-theme: mat-dark-theme(
 );
 
 // Include all the themes (including core and each component theme)
-// @include angular-material-theme($my-app-dark-theme);
-@include angular-material-theme($my-app-theme);
+@include angular-material-theme($my-app-dark-theme);
+// @include angular-material-theme($my-app-theme);

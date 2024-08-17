@@ -17,4 +17,5 @@ export interface IItemInCart {
 export interface ITotalCart {
   list: IItemInCart[];
   totalToPay: number;
+  isOpen?: boolean;
 }
