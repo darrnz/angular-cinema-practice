@@ -1,0 +1,16 @@
+.ticket-page {
+  height: 100%;
+  display: block;
+}
+.tickets-section {
+  margin:   2vw 5vw;
+}
+.movie-image {
+  width: 200px;
+  height: 250px;
+  border-radius: 10px;
+}
+
+.movie-desc {
+  display: flex;
+}

@@ -18,15 +18,24 @@ export class CartService {
 
   getCartItems(): ITotalCart {
     const currentCartState = this.cartSubject.value;
+    console.log('currentCartState', currentCartState);
     return this.cartSubject.getValue();
   }
 
   addCartItem(item: ITotalCart) {
-    this.cartSubject.next(item);
+    const currentCartState = this.cartSubject.value;
+    console.log('item', item);
+    console.log('currentCartState', this.cartSubject.value);
+
+    this.cartSubject.next({...currentCartState, list: item.list, totalToPay: item.totalToPay});
   }
 
   openCartDetails(value: boolean) {
     const currentCartState = this.cartSubject.value;
+
+    console.log('CurrentState', currentCartState);
+    console.log('Updated State', {...this.cartSubject.value, isOpen: value})
+
     this.cartSubject.next({ ...currentCartState, isOpen: value });
   }
 }

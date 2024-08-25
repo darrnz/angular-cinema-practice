@@ -12,7 +12,7 @@ export class NavigationService {
     this.router.navigate(['/home']);
   }
 
-  navigateToMovieDetail(id: string) {
+  navigateToMovieDetail(id: string | number) {
     this.router.navigate([`/movie/${id}`]);
   }
 }

@@ -11,7 +11,7 @@ export class MovieCardComponent {
 
   constructor(private navigationService: NavigationService) { }
 
-  goToMovieDetails(id: string) {
+  goToMovieDetails(id: string | number) {
     this.navigationService.navigateToMovieDetail(id);
   }
   @Input() movieData: IMovies | undefined = undefined

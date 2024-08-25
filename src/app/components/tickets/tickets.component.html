@@ -1,0 +1,40 @@
+<div class="ticket-page">
+  <h2>Buy your Tickets!</h2>
+  <div class="tickets-section">
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let movie of availableMovies" (opened)="setTicketStoreItems(movie.id)">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon fontIcon="movie" class="icon"></mat-icon>
+            <span>{{ movie.title }}</span>
+          </mat-panel-title>
+          <mat-panel-description>
+            <span>Price: $10</span>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div id="select-movie">
+          <section class="movie-desc">
+            <img
+              [src]="movie.image"
+              
+              class="movie-image"
+            />
+            <article class="mx-4">{{ movie.overview }}</article>
+          </section>
+          <section class="mt-4">
+            <mat-chip-set>
+              <mat-chip *ngFor="let time of movie?.timesheet">{{
+                time
+              }}</mat-chip>
+            </mat-chip-set>
+          </section>
+            <app-ticket-item 
+              [item]="ticketStoreInformation"
+              [cartItems]="cartItems"
+              (cartItemsChange)="onUpdateCart($event)"
+            />
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>

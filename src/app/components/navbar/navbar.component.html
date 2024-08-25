@@ -1,7 +1,12 @@
 <mat-toolbar color="primary" class="fullWidth navBarClass">
   <div>Ramona Cinema</div>
   <div class="navButtonsMenu">
-    <app-action-button (click)="toggleCart()"
+    <app-action-button
+      ><div iconBtn>
+        <mat-icon fontIcon="home" [routerLink]="'/'" />
+      </div>
+    </app-action-button>
+    <app-action-button *ngIf="cartQuantity > 0" (click)="toggleCart()"
       ><div iconBtn>
         <mat-icon
           [matBadge]="cartQuantity"
@@ -15,8 +20,8 @@
       [routerLink]="'/store'"
       text="Store"
     />
-    <app-action-button text="Billboard" />
-    <app-action-button text="Offers" />
-    <app-action-button text="Tickets" />
+    <app-action-button text="Tickets" routerLinkActive="active-link"
+    [routerLink]="'/tickets'" />
+    <app-action-button text="Contact" />
   </div>
 </mat-toolbar>

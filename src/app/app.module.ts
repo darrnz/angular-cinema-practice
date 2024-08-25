@@ -13,6 +13,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { MovieDetailComponent } from './components/movie-detail/movie-detail.component';
 import { StoreComponent } from './components/store/store.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
+import { TicketsComponent } from './components/tickets/tickets.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import { SideNavComponent } from './components/side-nav/side-nav.component';
     MovieDetailComponent,
     StoreComponent,
     SideNavComponent,
+    TicketsComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,6 +34,7 @@ import { SideNavComponent } from './components/side-nav/side-nav.component';
     SharedModule,
     HttpClientModule,
     AppRoutingModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

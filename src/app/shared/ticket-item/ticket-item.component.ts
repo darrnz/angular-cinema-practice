@@ -1,20 +1,12 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { SelectedItemType, StoreItemType, ITotalCart } from 'src/app/types/store';
 
 @Component({
-  selector: 'app-store-item',
-  templateUrl: './store-item.component.html',
-  styleUrls: ['./store-item.component.scss'],
+  selector: 'app-ticket-item',
+  templateUrl: './ticket-item.component.html',
+  styleUrls: ['./ticket-item.component.scss']
 })
-export class StoreItemComponent implements OnInit {
+export class TicketItemComponent implements OnInit, OnChanges {
   @Input() item: StoreItemType | undefined;
   @Input() cartItems: ITotalCart = {
     list: [] as SelectedItemType[],
@@ -25,6 +17,8 @@ export class StoreItemComponent implements OnInit {
   totalQuantity: number = 0;
 
   cartHasItem() {
+
+    
     return this.cartItems?.list.some((item) => item.id === this.item?.id);
   }
 
@@ -33,11 +27,11 @@ export class StoreItemComponent implements OnInit {
     this.totalQuantity = this.quantity * (this.item?.price || 0);
     if (!this.cartHasItem()) {
       this.cartItems?.list.push({
-        id: this.item?.id || 0,
+        id: this.item?.id || '',
         name: this.item?.name || '',
         quantity: 1,
         total: this.item?.price || 0,
-        type: 'snack',
+        type: 'ticket'
       });
     } else {
       this.cartItems?.list.forEach((item) => {
@@ -56,6 +50,7 @@ export class StoreItemComponent implements OnInit {
       this.totalQuantity = this.quantity * (this.item?.price || 0);
       if (this.cartHasItem()) {
         this.cartItems?.list.forEach((item) => {
+          
           if (item.id === this.item?.id) {
             item.quantity--;
             item.total = item.quantity * (this.item?.price || 0);
@@ -70,7 +65,7 @@ export class StoreItemComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('cartItems', this.cartItems);
+    console.log('cartItems', this.item);
     const itemQuantity = this.cartItems?.list.find(
       (item) => item.id === this.item?.id
     )?.quantity;

@@ -1,11 +1,21 @@
 <mat-sidenav-container>
-  <mat-sidenav  id="sidebar" mode="side" position="end" [(opened)]="isOpen"
-    >
+  <mat-sidenav id="sidebar" mode="side" position="end" [(opened)]="isOpen">
     <div>
       <app-action-button text="Hide / Show" (click)="toggleSideNav()" />
     </div>
-    <div ngFor=""></div
-  ></mat-sidenav>
-  
+    <section *ngIf="cartHasTickets()">
+      <h3>Ticket</h3>
+      <app-ticket-item [cartItems]="cartInfo" [item]="selectedMovie" />
+    </section>
+    <section *ngIf="snackList.length > 0">
+      <h3>Snacks</h3>
+      <app-store-item
+        *ngFor="let snack of snackList"
+        [cartItems]="cartInfo"
+        [item]="snack"
+      />
+    </section>
+  </mat-sidenav>
+
   <mat-sidenav-content><ng-content></ng-content></mat-sidenav-content>
 </mat-sidenav-container>

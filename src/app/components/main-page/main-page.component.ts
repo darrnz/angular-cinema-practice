@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { ApiServiceService } from 'src/app/services/movie-service/api-service.service';
 import { IMovies } from 'src/app/types/movies';
+import { moviesTimesheet } from 'src/assets/db-mock/timesheet';
 
 @Component({
   selector: 'app-main-page',
@@ -12,6 +13,7 @@ import { IMovies } from 'src/app/types/movies';
 export class MainPageComponent {
   private unsuscribe$ = new Subject<void>();
   movies: IMovies[] = [];
+  movieTimeSheet: any[] = moviesTimesheet;
   constructor(
     private apiServiceService: ApiServiceService,
   ) {}
@@ -24,7 +26,7 @@ export class MainPageComponent {
         next: (movies) => {
           console.log(movies);
           const { results } = movies;
-          this.movies = results.slice(0, 6).map((movie: any) => {
+          this.movies = results.slice(0, 10).map((movie: any, i: number) => {
             return {
               image: `https://image.tmdb.org/t/p/w500/${movie.poster_path}`,
               title: movie.title,
@@ -33,9 +35,12 @@ export class MainPageComponent {
               overview: movie.overview,
               originalLanguage: movie.original_language,
               voteAverage: movie.vote_average,
+              timesheet: this.movieTimeSheet[i].showtimes ?? [],
             };
           });
+          // this.apiServiceService.setMovieList(this.movies);
         },
+
       });
   }
 
