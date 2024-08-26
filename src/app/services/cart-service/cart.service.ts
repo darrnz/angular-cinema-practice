@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { ITotalCart } from 'src/app/types/store';
+import { TotalCartType } from 'src/app/types/store';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  private cartSubject = new BehaviorSubject<ITotalCart>({
+  private cartSubject = new BehaviorSubject<TotalCartType>({
     list: [],
     totalToPay: 0,
     isOpen: false,
@@ -16,13 +16,13 @@ export class CartService {
 
   constructor() {}
 
-  getCartItems(): ITotalCart {
+  getCartItems(): TotalCartType {
     const currentCartState = this.cartSubject.value;
     console.log('currentCartState', currentCartState);
     return this.cartSubject.getValue();
   }
 
-  addCartItem(item: ITotalCart) {
+  addCartItem(item: TotalCartType) {
     const currentCartState = this.cartSubject.value;
     console.log('item', item);
     console.log('currentCartState', this.cartSubject.value);

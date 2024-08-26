@@ -7,7 +7,11 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { SelectedItemType, StoreItemType, ITotalCart } from 'src/app/types/store';
+import {
+  SelectedItemType,
+  StoreItemType,
+  TotalCartType,
+} from 'src/app/types/store';
 
 @Component({
   selector: 'app-store-item',
@@ -16,11 +20,11 @@ import { SelectedItemType, StoreItemType, ITotalCart } from 'src/app/types/store
 })
 export class StoreItemComponent implements OnInit {
   @Input() item: StoreItemType | undefined;
-  @Input() cartItems: ITotalCart = {
+  @Input() cartItems: TotalCartType = {
     list: [] as SelectedItemType[],
     totalToPay: 0,
   };
-  @Output() cartItemsChange = new EventEmitter<ITotalCart>();
+  @Output() cartItemsChange = new EventEmitter<TotalCartType>();
   quantity: number = 0;
   totalQuantity: number = 0;
 
@@ -37,7 +41,11 @@ export class StoreItemComponent implements OnInit {
         name: this.item?.name || '',
         quantity: 1,
         total: this.item?.price || 0,
-        type: 'snack',
+        description: this.item?.description || '',
+        price: this.item?.price || 0,
+        category: this.item?.category || '',
+        type: this.item?.type || 'snack',
+        imageUrl: this.item?.imageUrl || '',
       });
     } else {
       this.cartItems?.list.forEach((item) => {
@@ -70,7 +78,7 @@ export class StoreItemComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('cartItems', this.cartItems);
+    console.log('cartItems - sOTRE', this.item);
     const itemQuantity = this.cartItems?.list.find(
       (item) => item.id === this.item?.id
     )?.quantity;

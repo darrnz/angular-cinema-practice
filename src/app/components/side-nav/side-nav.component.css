@@ -10,3 +10,8 @@
   color: white;
   background-color: white;
 }
+
+.main-page {
+  display: block;
+  height: 100%
+}

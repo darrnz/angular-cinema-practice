@@ -1,16 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart-service/cart.service';
 import { SnackServiceService } from 'src/app/services/snack-service/snack-service.service';
-import { SelectedItemType, StoreItemType, ITotalCart } from 'src/app/types/store';
+import { SelectedItemType, StoreItemType, TotalCartType } from 'src/app/types/store';
 
 @Component({
   selector: 'app-store',
   templateUrl: './store.component.html',
   styleUrls: ['./store.component.scss'],
 })
-export class StoreComponent {
+export class StoreComponent implements OnInit {
   snackList: any[] = [];
-  cartItems: ITotalCart = {
+  cartItems: TotalCartType = {
     list: [],
     totalToPay: 0,
   };
@@ -27,7 +27,7 @@ export class StoreComponent {
     this.cartItems.totalToPay = this.totalCart;
   }
 
-  onUpdateCart(item: ITotalCart) {
+  onUpdateCart(item: TotalCartType) {
     this.cartItems.list = item.list;
     this.calculateTotalCart();
     this.cartService.addCartItem({
@@ -41,8 +41,12 @@ export class StoreComponent {
       .pipe()
       .subscribe((res: StoreItemType[]) => {
         console.log('res', res);
-        this.snackList = res;
+        const filteredItems = res.filter((item) => {
+          return item.type === 'snack'
+        });
+        this.snackList = filteredItems;
       });
+      console.log('STOREITEMS', this.snackList);
 
       this.cartService.cart$.subscribe((res) => {
         this.cartItems = res;

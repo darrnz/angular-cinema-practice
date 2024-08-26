@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart-service/cart.service';
 import { ApiServiceService } from 'src/app/services/movie-service/api-service.service';
 import { IMovies } from 'src/app/types/movies';
-import { StoreItemType, ITotalCart } from 'src/app/types/store';
+import { StoreItemType, TotalCartType } from 'src/app/types/store';
 
 @Component({
   selector: 'app-tickets',
@@ -12,7 +12,7 @@ import { StoreItemType, ITotalCart } from 'src/app/types/store';
 export class TicketsComponent implements OnInit {
   availableMovies: IMovies[] = [];
   ticketStoreInformation: StoreItemType | undefined;
-  cartItems: ITotalCart = {
+  cartItems: TotalCartType = {
     list: [],
     totalToPay: 0,
   };
@@ -33,6 +33,7 @@ export class TicketsComponent implements OnInit {
       price: 50,
       imageUrl: movieInfo?.image ?? '',
       category: 'ticket',
+      type: 'ticket'
     };
   }
 
@@ -45,7 +46,7 @@ export class TicketsComponent implements OnInit {
     console.log(this.availableMovies);
   }
 
-  onUpdateCart(item: ITotalCart) {
+  onUpdateCart(item: TotalCartType) {
     this.cartItems.list = item.list;
     this.calculateTotalCart();
     this.cartService.addCartItem({

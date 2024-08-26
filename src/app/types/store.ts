@@ -5,17 +5,16 @@ export interface StoreItemType {
   price: number;
   imageUrl: string;
   category: string;
+  type: 'snack' | 'ticket'
+
 }
 
 export interface SelectedItemType extends StoreItemType {
-  id: number | string;
-  name: string;
   quantity: number;
   total: number;
-  type: 'snack' | 'ticket'
 }
 
-export interface ITotalCart {
+export interface TotalCartType {
   list: SelectedItemType[];
   totalToPay: number;
   isOpen?: boolean;

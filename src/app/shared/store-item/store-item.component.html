@@ -17,7 +17,10 @@
     </button>
   </div>
   <div>
-    <div>Total: {{ totalQuantity }}</div>
+    <div>Number: {{ totalQuantity }}</div>
+  </div>
+  <div class="pl-3">
+    <div>Total: {{ ((totalQuantity ?? 0) * (item?.price ?? 0)) | currency }}</div>
   </div>
   <mat-divider></mat-divider>
 </div>
