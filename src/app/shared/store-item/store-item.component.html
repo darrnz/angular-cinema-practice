@@ -4,7 +4,7 @@
     <h3>{{ item?.name }}</h3>
   </div>
   <div class="price">
-    <p>{{ item?.price | currency }}</p>
+    <p>{{ item?.price ?? 0 | currencyConverter }}</p>
   </div>
 
   <div class="quantity-controls">
@@ -20,7 +20,7 @@
     <div>Number: {{ totalQuantity }}</div>
   </div>
   <div class="pl-3">
-    <div>Total: {{ ((totalQuantity ?? 0) * (item?.price ?? 0)) | currency }}</div>
+    <div>Total: {{ (totalQuantity ?? 0) * (item?.price ?? 0) | currency }}</div>
   </div>
   <mat-divider></mat-divider>
 </div>

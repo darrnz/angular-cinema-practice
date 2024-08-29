@@ -20,8 +20,25 @@
       [routerLink]="'/store'"
       text="Store"
     />
-    <app-action-button text="Tickets" routerLinkActive="active-link"
-    [routerLink]="'/tickets'" />
+    <app-action-button
+      text="Tickets"
+      routerLinkActive="active-link"
+      [routerLink]="'/tickets'"
+    />
     <app-action-button text="Contact" />
+    <div>
+      <mat-form-field>
+        <mat-label>Currency</mat-label>
+        <mat-select class="" [(value)]="currencySelected" (selectionChange)="changeCurrency($event)">
+          <mat-option
+            *ngFor="let currency of currencyTypesOptions"
+            [value]="currency.value"
+            
+          >
+            {{ currency.viewValue }}
+          </mat-option>
+        </mat-select></mat-form-field
+      >
+    </div>
   </div>
 </mat-toolbar>
