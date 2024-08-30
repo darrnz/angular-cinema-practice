@@ -1,0 +1,28 @@
+<div id="contact-page" class="d-flex mx-4 mt-4 align-items-center flex-column">
+  <div><h3>Contact Us</h3></div>
+
+  <form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
+    <div class="d-flex my-3  justify-content-around">
+
+      <input id="name" class="mx-3 py-2" name="name" type="text" placeholder="Name" [(ngModel)]="contactInfo.name" required />
+      <input [(ngModel)]="contactInfo.lastName"  class="mx-3 py-2" name="lastName" type="text" placeholder="Last Name" required />
+    </div>
+    <div class="d-flex my-2 justify-content-around">
+      <input class="mx-3 py-2" name="email" type="email" placeholder="Email" [(ngModel)]="contactInfo.email" required  />
+      <input class="mx-3 py-2" name="phone" type="text" placeholder="Phone" maxlength="10" [(ngModel)]="contactInfo.phone" required  />
+    </div>
+    <div class="d-flex my-3 justify-content-around">
+      <mat-select name="reason" value="question" [(ngModel)]="contactInfo.reason"  class="bg-secondary mx-3 px-2 py-2 text-info" placeholder="Select a reason">
+        <mat-option value="question">Question</mat-option>
+        <mat-option value="suggestion">Suggestion</mat-option>
+        <mat-option value="complaint">Complaint</mat-option>
+      </mat-select>
+    </div>
+    <div  class="d-flex my-3 justify-content-around w-100">
+      <textarea name="message" class="w-100 mx-3 py-2" placeholder="Message" rows="5" [(ngModel)]="contactInfo.message" required ></textarea>
+    </div>
+    <div  class="d-flex my-3 justify-content-around w-100">
+      <app-action-button type="submit" text="Send" />
+    </div>
+  </form>
+</div>

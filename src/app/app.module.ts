@@ -15,6 +15,8 @@ import { StoreComponent } from './components/store/store.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { TicketsComponent } from './components/tickets/tickets.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ConctactComponent } from './conctact/conctact.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     StoreComponent,
     SideNavComponent,
     TicketsComponent,
+    ConctactComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +38,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     AppRoutingModule,
     NgbModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
