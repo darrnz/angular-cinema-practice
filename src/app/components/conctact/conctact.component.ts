@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { APP_MESSAGES } from '../utils/messages';
+import { APP_MESSAGES } from '../../utils/messages';
 
 @Component({
   selector: 'app-conctact',

@@ -5,7 +5,7 @@ import { MainPageComponent } from './components/main-page/main-page.component';
 import { MovieDetailComponent } from './components/movie-detail/movie-detail.component';
 import { StoreComponent } from './components/store/store.component';
 import { TicketsComponent } from './components/tickets/tickets.component';
-import { ConctactComponent } from './conctact/conctact.component';
+import { ConctactComponent } from './components/conctact/conctact.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' }, // Default route

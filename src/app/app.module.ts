@@ -15,7 +15,7 @@ import { StoreComponent } from './components/store/store.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { TicketsComponent } from './components/tickets/tickets.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ConctactComponent } from './conctact/conctact.component';
+import { ConctactComponent } from './components/conctact/conctact.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
