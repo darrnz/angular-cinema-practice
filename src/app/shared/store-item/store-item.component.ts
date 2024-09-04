@@ -81,10 +81,7 @@ export class StoreItemComponent implements OnInit {
     }
   }
 
-  addToCart() {}
-
   ngOnInit() {
-    console.log('cartItems - sOTRE', this.item);
     const itemQuantity = this.cartItems?.list.find(
       (item) => item.id === this.item?.id || this.item?.type === 'ticket'
     )?.quantity;
@@ -96,7 +93,6 @@ export class StoreItemComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('cartItems - Change', this.item);
     if (changes['cartItems'] && !changes['cartItems'].firstChange) {
       const cartItem = this.cartItems.list.find(
         (item) => item.id === this.item?.id || this.item?.type === 'ticket'

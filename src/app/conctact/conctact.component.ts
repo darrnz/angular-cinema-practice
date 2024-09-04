@@ -61,7 +61,7 @@ export class ConctactComponent {
       email: this.contactInfo.email,
       phone: this.contactInfo.phone,
       message: this.contactInfo.message,
-      reason: this.contactInfo.reason.toUpperCase,
+      reason: this.contactInfo.reason.toUpperCase(),
     });
     this.openSnackBar(this.validFormMessage);
     this.resetForm();

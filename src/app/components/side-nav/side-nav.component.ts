@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CartService } from 'src/app/services/cart-service/cart.service';
 import { Router } from '@angular/router';
@@ -12,7 +12,6 @@ import { ModalDialogComponent } from 'src/app/shared/modal-dialog/modal-dialog.c
   styleUrls: ['./side-nav.component.css'],
 })
 export class SideNavComponent implements OnInit, OnDestroy {
-  private cdr!: ChangeDetectorRef;
   public cartItemsSubscription!: Subscription;
   public isOpen: boolean = false;
   public cartInfo: TotalCartType = { list: [], totalToPay: 0 };
@@ -39,8 +38,6 @@ export class SideNavComponent implements OnInit, OnDestroy {
       this.selectedMovies = cart.list.filter((item) => item.type === 'ticket');
       this.handleCartHasTickets();
     });
-
-    this.cdr.detectChanges();
   }
 
   toggleSideNav() {
