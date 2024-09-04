@@ -1,18 +1,8 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CartService } from 'src/app/services/cart-service/cart.service';
 import { Router } from '@angular/router';
-import {
-  SelectedItemType,
-  StoreItemType,
-  TotalCartType,
-} from 'src/app/types/store';
+import { StoreItemType, TotalCartType } from 'src/app/types/store';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalDialogComponent } from 'src/app/shared/modal-dialog/modal-dialog.component';
 
@@ -73,7 +63,6 @@ export class SideNavComponent implements OnInit, OnDestroy {
   }
 
   handleCheckout() {
-
     this.dialog.open(ModalDialogComponent, {
       width: '400px',
 
