@@ -1,24 +1,42 @@
 <mat-sidenav-container>
-  <mat-sidenav class="mx-2" id="sidebar" mode="side" position="end" [(opened)]="isOpen">
-    <div>
-      <app-action-button text="Hide / Show" (click)="toggleSideNav()" />
-    </div>
+  <mat-sidenav
+    class="mx-2"
+    id="sidebar"
+    mode="side"
+    position="end"
+    [(opened)]="isOpen"
+  >
     <section *ngIf="cartInfo.list.length > 0" class="mx-3">
       <h3>Snacks</h3>
       <div *ngFor="let item of cartInfo.list">
         <app-store-item
-          *ngIf="item.type === 'snack'; else isTicket"
+          *ngIf="item.type === 'snack'"
           [cartItems]="cartInfo"
           [item]="item"
+          [isCartItem]="true"
         ></app-store-item>
-        <ng-template #isTicket>
-          <h3>Tickets</h3>
-          <app-store-item [cartItems]="cartInfo" [item]="item"></app-store-item>
-        </ng-template>
+      </div>
+      <div *ngIf="cartHasTickets">
+        <h3>Tickets</h3>
+        <div *ngFor="let movie of selectedMovies">
+          <app-store-item
+            [cartItems]="cartInfo"
+            [item]="movie"
+            [isCartItem]="true"
+          ></app-store-item>
+        </div>
       </div>
     </section>
-    <div>Total: {{ totalToPay | currency }}</div>
+    <section id="checkout" class="d-flex justify-content-between">
+      <div>Total: {{ totalToPay | currency }}</div>
+      <app-action-button text="Checkout" (click)="handleCheckout()" />
+      <app-action-button text="Clear" (click)="handleClearCart()" />
+      <app-action-button text="Remove Tickets" (click)="(handleClearTickets)" />
+      <app-action-button text="x" (click)="toggleSideNav()" />
+    </section>
   </mat-sidenav>
 
-  <mat-sidenav-content autosize class="w-100 main-page"><ng-content></ng-content></mat-sidenav-content>
+  <mat-sidenav-content autosize class="w-100 main-page"
+    ><ng-content></ng-content
+  ></mat-sidenav-content>
 </mat-sidenav-container>

@@ -22,9 +22,7 @@ export class ConctactComponent {
   private validFormMessage = APP_MESSAGES.SUCCESS_INFO;
   private invalidFormMessage = APP_MESSAGES.INVALID_FORM;
 
-  constructor() {
-    console.log('Contact component created');
-  }
+  constructor() {}
 
   resetForm() {
     this.contactInfo = {
@@ -50,11 +48,21 @@ export class ConctactComponent {
   onSubmit(formData: NgForm) {
     const isValid = this.isFormValid(formData);
     if (!isValid) {
-      console.log('---> FORM IS INVALID <---');
       this.openSnackBar(this.invalidFormMessage);
       return;
     }
-    console.log('<---- CONTACT INFORMATION SUBMITED ---->', formData.value);
+    console.log('Form Contact data:', {
+      name:
+        this.contactInfo.name.charAt(0).toUpperCase() +
+        this.contactInfo.name.slice(1),
+      lastName:
+        this.contactInfo.lastName.charAt(0).toUpperCase() +
+        this.contactInfo.lastName.slice(1),
+      email: this.contactInfo.email,
+      phone: this.contactInfo.phone,
+      message: this.contactInfo.message,
+      reason: this.contactInfo.reason.toUpperCase,
+    });
     this.openSnackBar(this.validFormMessage);
     this.resetForm();
   }

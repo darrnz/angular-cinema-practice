@@ -1,7 +1,10 @@
-<mat-toolbar color="primary" class="fullWidth navBarClass">
+<mat-toolbar
+  class="d-flex justify-content-between align-items-center fullWidth"
+  color="primary"
+>
   <div>Ramona Cinema</div>
-  <div class="navButtonsMenu">
-    <app-action-button
+  <div class="d-flex justify-content-end align-items-center">
+    <app-action-button class="mx-1"
       ><div iconBtn>
         <mat-icon fontIcon="home" [routerLink]="'/'" />
       </div>
@@ -16,29 +19,36 @@
       </div>
     </app-action-button>
     <app-action-button
+    class="mr-1"
       routerLinkActive="active-link"
       [routerLink]="'/store'"
       text="Store"
     />
     <app-action-button
+    class="mx-1"
       text="Tickets"
       routerLinkActive="active-link"
       [routerLink]="'/tickets'"
     />
-    <app-action-button text="Contact" routerLinkActive [routerLink]="'/contact'" />
-    <div>
-      <mat-form-field>
-        <mat-label>Currency</mat-label>
-        <mat-select class="" [(value)]="currencySelected" (selectionChange)="changeCurrency($event)">
-          <mat-option
-            *ngFor="let currency of currencyTypesOptions"
-            [value]="currency.value"
-            
-          >
-            {{ currency.viewValue }}
-          </mat-option>
-        </mat-select></mat-form-field
+    <app-action-button
+    class="mx-1"
+      text="Contact"
+      routerLinkActive
+      [routerLink]="'/contact'"
+    />
+    <mat-form-field class="w-25 mt-4">
+      <mat-select
+        class="currency-selector fs-6 p-0"
+        [(value)]="currencySelected"
+        (selectionChange)="changeCurrency($event)"
       >
-    </div>
+        <mat-option
+          *ngFor="let currency of currencyTypesOptions"
+          [value]="currency.value"
+        >
+          {{ currency.viewValue }}
+        </mat-option>
+      </mat-select></mat-form-field
+    >
   </div>
 </mat-toolbar>

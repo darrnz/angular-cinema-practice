@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { ApiServiceService } from 'src/app/services/movie-service/api-service.service';
 import { IMovies } from 'src/app/types/movies';
@@ -14,9 +13,7 @@ export class MainPageComponent {
   private unsuscribe$ = new Subject<void>();
   movies: IMovies[] = [];
   movieTimeSheet: any[] = moviesTimesheet;
-  constructor(
-    private apiServiceService: ApiServiceService,
-  ) {}
+  constructor(private apiServiceService: ApiServiceService) {}
 
   ngOnInit() {
     this.apiServiceService
@@ -24,7 +21,6 @@ export class MainPageComponent {
       .pipe(takeUntil(this.unsuscribe$))
       .subscribe({
         next: (movies) => {
-          console.log(movies);
           const { results } = movies;
           this.movies = results.slice(0, 10).map((movie: any, i: number) => {
             return {
@@ -38,9 +34,7 @@ export class MainPageComponent {
               timesheet: this.movieTimeSheet[i].showtimes ?? [],
             };
           });
-          // this.apiServiceService.setMovieList(this.movies);
         },
-
       });
   }
 
@@ -48,5 +42,4 @@ export class MainPageComponent {
     this.unsuscribe$.next();
     this.unsuscribe$.complete();
   }
-  // console.log(movies);
 }

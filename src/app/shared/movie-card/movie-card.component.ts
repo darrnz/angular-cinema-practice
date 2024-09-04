@@ -15,5 +15,9 @@ export class MovieCardComponent {
     this.navigationService.navigateToMovieDetail(id);
   }
   @Input() movieData: IMovies | undefined = undefined
+
+  goToTickets() {
+    this.navigationService.navigateToTickets();
+  }
   
 }

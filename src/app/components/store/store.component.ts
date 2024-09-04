@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart-service/cart.service';
 import { SnackServiceService } from 'src/app/services/snack-service/snack-service.service';
-import { SelectedItemType, StoreItemType, TotalCartType } from 'src/app/types/store';
+import { StoreItemType, TotalCartType } from 'src/app/types/store';
 
 @Component({
   selector: 'app-store',
@@ -33,27 +33,23 @@ export class StoreComponent implements OnInit {
     this.cartService.addCartItem({
       list: item.list,
       totalToPay: this.cartItems.totalToPay,
-    })
+    });
   }
   ngOnInit() {
     this.snackService
       .getSnacks()
       .pipe()
       .subscribe((res: StoreItemType[]) => {
-        console.log('res', res);
         const filteredItems = res.filter((item) => {
-          return item.type === 'snack'
+          return item.type === 'snack';
         });
         this.snackList = filteredItems;
       });
-      console.log('STOREITEMS', this.snackList);
 
-      this.cartService.cart$.subscribe((res) => {
-        this.cartItems = res;
-        this.calculateTotalCart();
-      })
+    this.cartService.cart$.subscribe((res) => {
+      this.cartItems = res;
+      this.calculateTotalCart();
+    });
   }
-  ngOnChanges() {
-    console.log('Onchanges', this.cartItems);
-  }
+  ngOnChanges() {}
 }

@@ -2,38 +2,53 @@
   <h2>Buy your Tickets!</h2>
   <div class="tickets-section">
     <mat-accordion>
-      <mat-expansion-panel *ngFor="let movie of availableMovies" (opened)="setTicketStoreItems(movie.id)">
+      <mat-expansion-panel
+        *ngFor="let movie of availableMovies"
+        (opened)="setTicketStoreItems(movie.id)"
+      >
         <mat-expansion-panel-header>
           <mat-panel-title>
             <mat-icon fontIcon="movie" class="icon"></mat-icon>
             <span>{{ movie.title }}</span>
           </mat-panel-title>
           <mat-panel-description>
-            <span>Price: $10</span>
+            <span>Price: {{price  | currencyConverter }}</span>
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <div id="select-movie">
-          <section class="movie-desc">
-            <img
-              [src]="movie.image"
-              
-              class="movie-image"
-            />
-            <article class="mx-4">{{ movie.overview }}</article>
-          </section>
-          <section class="mt-4">
-            <mat-chip-set>
-              <mat-chip *ngFor="let time of movie?.timesheet">{{
-                time
-              }}</mat-chip>
-            </mat-chip-set>
-          </section>
-            <app-store-item
+        <form [formGroup]="selectedTicketsForm" (ngSubmit)="handleOnSubmit()">
+          <div id="select-movie">
+            <section class="movie-desc">
+              <img [src]="movie.image" class="movie-image" />
+              <article class="mx-4">{{ movie.overview }}</article>
+            </section>
+            <section class="my-4">
+              <mat-chip-listbox formControlName="movieInfo">
+                <mat-chip-option 
+                
+                  (selectionChange)="handleSelectedTime($event)"
+                  *ngFor="let time of movie?.timesheet"
+                  [value]="{ time: time, movieId: movie.id }"
+                  >{{ time }}</mat-chip-option
+                >
+              </mat-chip-listbox>
+            </section>
+            <section class="my-4">
+              <app-date-picker
+                [selectedTicketsForm]="selectedTicketsForm"
+                [elem]="'date'"
+                [patchVal]="date"
+                (eventDate)="getDate('date', $event)"
+              />
+            </section>
+            <app-ticket-item
               [item]="ticketStoreInformation"
               [cartItems]="cartItems"
-              (cartItemsChange)="onUpdateCart($event)"
+              (quantityChange)="updateQuantity($event)"
+
             />
-        </div>
+          </div>
+          <div><app-action-button text="Add to Cart" type="submit" /></div>
+        </form>
       </mat-expansion-panel>
     </mat-accordion>
   </div>

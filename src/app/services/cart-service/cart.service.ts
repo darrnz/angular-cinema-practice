@@ -17,25 +17,43 @@ export class CartService {
   constructor() {}
 
   getCartItems(): TotalCartType {
-    const currentCartState = this.cartSubject.value;
-    console.log('currentCartState', currentCartState);
     return this.cartSubject.getValue();
   }
 
   addCartItem(item: TotalCartType) {
     const currentCartState = this.cartSubject.value;
-    console.log('item', item);
-    console.log('currentCartState', this.cartSubject.value);
 
-    this.cartSubject.next({...currentCartState, list: item.list, totalToPay: item.totalToPay});
+    this.cartSubject.next({
+      ...currentCartState,
+      list: item.list,
+      totalToPay: item.totalToPay,
+      isOpen: true,
+    });
   }
 
   openCartDetails(value: boolean) {
     const currentCartState = this.cartSubject.value;
 
-    console.log('CurrentState', currentCartState);
-    console.log('Updated State', {...this.cartSubject.value, isOpen: value})
-
     this.cartSubject.next({ ...currentCartState, isOpen: value });
+  }
+
+  clearTickets() {
+    const currentCartState = this.cartSubject.value;
+    const updatedList = currentCartState.list.filter(
+      (item) => item.type !== 'ticket'
+    );
+    const recalculateTotal = updatedList.reduce(
+      (acc, item) => acc + item.price * item.quantity,
+      0
+    );
+    this.cartSubject.next({
+      ...currentCartState,
+      list: updatedList,
+      totalToPay: recalculateTotal,
+    });
+  }
+
+  clearCart() {
+    this.cartSubject.next({ list: [], totalToPay: 0, isOpen: false });
   }
 }

@@ -15,4 +15,7 @@ export class NavigationService {
   navigateToMovieDetail(id: string | number) {
     this.router.navigate([`/movie/${id}`]);
   }
+  navigateToTickets() {
+    this.router.navigate(['/tickets']);
+  }
 }

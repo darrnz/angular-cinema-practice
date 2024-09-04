@@ -7,7 +7,7 @@
     <p>{{ item?.price ?? 0 | currencyConverter }}</p>
   </div>
 
-  <div class="quantity-controls">
+  <div class="quantity-controls" *ngIf="!isCartItem">
     <button mat-icon-button (click)="decreaseQuantity()">
       <mat-icon>remove_circle_outline</mat-icon>
     </button>
@@ -16,7 +16,7 @@
       <mat-icon fontIcon="add">add</mat-icon>
     </button>
   </div>
-  <div>
+  <div class="mx-2">
     <div>Number: {{ totalQuantity }}</div>
   </div>
   <div class="pl-3">

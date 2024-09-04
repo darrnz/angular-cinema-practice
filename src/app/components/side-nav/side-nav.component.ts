@@ -1,8 +1,20 @@
-import { Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CartService } from 'src/app/services/cart-service/cart.service';
-import { SnackServiceService } from 'src/app/services/snack-service/snack-service.service';
-import { SelectedItemType, StoreItemType, TotalCartType } from 'src/app/types/store';
+import { Router } from '@angular/router';
+import {
+  SelectedItemType,
+  StoreItemType,
+  TotalCartType,
+} from 'src/app/types/store';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalDialogComponent } from 'src/app/shared/modal-dialog/modal-dialog.component';
 
 @Component({
   selector: 'app-side-nav',
@@ -10,32 +22,81 @@ import { SelectedItemType, StoreItemType, TotalCartType } from 'src/app/types/st
   styleUrls: ['./side-nav.component.css'],
 })
 export class SideNavComponent implements OnInit, OnDestroy {
+  private cdr!: ChangeDetectorRef;
   public cartItemsSubscription!: Subscription;
   public isOpen: boolean = false;
   public cartInfo: TotalCartType = { list: [], totalToPay: 0 };
   public totalToPay: number = 0;
-  public selectedMovie: StoreItemType | undefined;
+  public selectedMovies: StoreItemType[] | undefined;
+  public cartHasTickets: boolean = false;
 
   constructor(
     private cartService: CartService,
+    private router: Router,
+    private dialog: MatDialog
   ) {}
-
+  calculateTotal(): number {
+    return this.cartInfo.list.reduce(
+      (acc, item) => acc + item.price * item.quantity,
+      0
+    );
+  }
   ngOnInit() {
     this.cartItemsSubscription = this.cartService.cart$.subscribe((cart) => {
       this.isOpen = cart.isOpen ?? false;
       this.cartInfo = { list: cart.list, totalToPay: cart.totalToPay };
-      this.totalToPay = cart.totalToPay;
-      this.selectedMovie = cart.list.find((item) => {
-        item.type === 'ticket'});
+      this.totalToPay = this.calculateTotal();
+      this.selectedMovies = cart.list.filter((item) => item.type === 'ticket');
+      this.handleCartHasTickets();
     });
-  }
-  toggleSideNav() {
-    this.cartService.openCartDetails(!this.isOpen);
-    console.log('itemsInCartList', this.cartInfo);
+
+    this.cdr.detectChanges();
   }
 
-  cartHasTickets() {
-    this.cartInfo.list.some(item => item.type === 'ticket')
+  toggleSideNav() {
+    this.cartService.openCartDetails(!this.isOpen);
+  }
+
+  handleCartHasTickets() {
+    this.cartHasTickets = this.cartInfo.list.some(
+      (item) => item.type === 'ticket'
+    );
+  }
+
+  handleClearCart() {
+    this.cartService.clearCart();
+  }
+
+  handleClearTickets() {
+    this.cartService.clearTickets();
+    this.router.navigate(['/tickets']);
+  }
+
+  handleCheckout() {
+
+    this.dialog.open(ModalDialogComponent, {
+      width: '400px',
+
+      data: {
+        title: 'Checkout',
+        content: this.cartInfo.list,
+        message: 'Are you sure you want to checkout?',
+        actions: [
+          {
+            text: 'Yes, Pay: $' + this.totalToPay,
+            handler: () => {
+              this.handleClearCart();
+              this.router.navigate(['/home']);
+              this.dialog.closeAll();
+            },
+          },
+          {
+            text: 'No',
+            handler: () => {},
+          },
+        ],
+      },
+    });
   }
 
   ngOnDestroy() {

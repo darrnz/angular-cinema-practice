@@ -2,7 +2,6 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnChanges,
   OnInit,
   Output,
   SimpleChanges,
@@ -20,6 +19,8 @@ import {
 })
 export class StoreItemComponent implements OnInit {
   @Input() item: StoreItemType | undefined;
+  @Input() customName?: string = '';
+  @Input() isCartItem: boolean = false;
   @Input() cartItems: TotalCartType = {
     list: [] as SelectedItemType[],
     totalToPay: 0,
@@ -29,6 +30,9 @@ export class StoreItemComponent implements OnInit {
   totalQuantity: number = 0;
 
   cartHasItem() {
+    if (this.item?.type === 'ticket') {
+      return true; // Always return true for tickets
+    }
     return this.cartItems?.list.some((item) => item.id === this.item?.id);
   }
 
@@ -77,22 +81,25 @@ export class StoreItemComponent implements OnInit {
     }
   }
 
+  addToCart() {}
+
   ngOnInit() {
     console.log('cartItems - sOTRE', this.item);
     const itemQuantity = this.cartItems?.list.find(
-      (item) => item.id === this.item?.id
+      (item) => item.id === this.item?.id || this.item?.type === 'ticket'
     )?.quantity;
     const itemTotal = this.cartItems?.list.find(
-      (item) => item.id === this.item?.id
+      (item) => item.id === this.item?.id || this.item?.type === 'ticket'
     )?.total;
     this.quantity = itemQuantity || 0;
     this.totalQuantity = itemTotal || 0;
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    console.log('cartItems - Change', this.item);
     if (changes['cartItems'] && !changes['cartItems'].firstChange) {
       const cartItem = this.cartItems.list.find(
-        (item) => item.id === this.item?.id
+        (item) => item.id === this.item?.id || this.item?.type === 'ticket'
       );
       if (cartItem) {
         this.quantity = cartItem.quantity;

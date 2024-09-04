@@ -1,0 +1,30 @@
+.store-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  justify-content: start;
+  border-bottom: 1px solid #ccc;
+  mat-icon {
+    margin-right: 10px;
+  }
+
+  .item-details {
+    min-width: 150px;
+    margin-left: 10px;
+    padding-right: 30px;
+    margin-right: 10px;
+  }
+
+  .quantity-controls {
+    display: flex;
+    margin: 0 15px;
+    align-items: center;
+    width: 150px button {
+      margin: 0 10px;
+    }
+  }
+
+  .price {
+    width: 70px;
+  }
+}

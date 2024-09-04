@@ -41,6 +41,5 @@ export class NavbarComponent implements OnInit {
   changeCurrency($event: any) {
     this.currencySelected = $event.value;
     this.currencyHandlerService.handleChangeCurrency(this.currencySelected);
-    console.log('currencySelected', this.currencySelected);
   }
 }

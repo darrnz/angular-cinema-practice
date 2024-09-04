@@ -1,13 +1,13 @@
 @import "src/app/app.component.scss";
 
-.navBarClass {
-  
-  display: flex;
-  justify-content: space-between !important;
-  align-items: center;
-}
-
 .navButtonsMenu {
   display: flex;
   justify-content: space-between;
+}
+
+.currency-selector {
+ .mat-select {
+    margin-top: 0 !important;
+    border-radius: 25% !important;
+  }
 }

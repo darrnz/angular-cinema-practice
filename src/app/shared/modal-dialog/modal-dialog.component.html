@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>{{ data.title }}</h1>
+<div mat-dialog-content>
+  <p>{{ data.message }}</p>
+</div>
+<div mat-dialog-content>
+  <ul>
+    <li *ngFor="let item of data.content">
+      {{ item.name }} ({{ item.quantity }}) - {{ item.price | currency }}
+    </li>
+  </ul>
+</div>
+
+<div
+  mat-dialog-actions
+  class="d-flex justify-content-between"
+  *ngFor="let action of data.actions"
+>
+  <app-action-button
+  class="w-50"
+    [text]="action.text"
+    (click)="action.handler()"
+  ></app-action-button>
+</div>
